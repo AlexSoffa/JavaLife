@@ -1,4 +1,4 @@
-package com.laboon;
+
 
 import java.util.Random;
 
@@ -74,8 +74,11 @@ public class World {
 	int rightX = (x + 1) % size;
 	int upY = (y - 1) % size;
 	int downY = (y + 1) % size;
-
-	for (int j = 0; j < 10000; j++) {
+    //This is the area that I refactored, reducing the for-loop bound from 10000 to 5
+	//drastically improved the performance of the program. This was assumed by me to be
+	//equivalent to busy waiting as it did not change the output of the code when reducing 
+	//the bound.
+	for (int j = 0; j < 5; j++) {
 	    if (leftX == -1) { leftX = size - 1; }
 	    if (rightX == -1) { rightX = size - 1; }
 	    if (upY == -1) { upY = size - 1; }
@@ -109,7 +112,7 @@ public class World {
 	    }
 	}
 	return new World(newCells, _rng);
-    }
+	}
 
     /**
      * Convert this World to a string for display.
